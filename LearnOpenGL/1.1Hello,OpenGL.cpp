@@ -1,12 +1,6 @@
-#include <glad/glad.h>
-#include <glfw3.h>
 
-#include <iostream>
 
-// 设置渲染视口大小的函数
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow* window);
-
+#include "Common.h"
 
 
 // 设置窗口大小的参数
@@ -73,17 +67,4 @@ int main()
 	// 渲染结束之后，释放相关的资源
 	glfwTerminate();
 	return 0;
-}
-
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	glViewport(0, 0, width, height);
-}
-
-void processInput(GLFWwindow* window)
-{
-	// 是否点击esc键,
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, true);
 }
