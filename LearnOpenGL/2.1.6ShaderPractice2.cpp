@@ -38,7 +38,7 @@ int main()
 	}
 
 	// 使用Shader类读取着色器
-	Shader ourShader("shader/VertexShader/Triangle.vs","shader/FragShader/Triangle.fs");
+	Shader ourShader("shader/VertexShader/Triangle.vs", "shader/FragShader/Triangle.fs");
 
 
 	// 链接顶点属性--告诉GPU解释顶点数据的方法
@@ -81,6 +81,14 @@ int main()
 		processInput(window);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+
+		float timeValue = glfwGetTime();
+		float greenValue = sin(timeValue);
+		
+		std::cout << greenValue << std::endl;
+
+		ourShader.setFloat("xOffset", greenValue);
 
 		// 绘制三角形
 		ourShader.use();

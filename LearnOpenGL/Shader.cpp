@@ -18,6 +18,7 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
 		fShaderFile.open(fragmentPath);
 		std::stringstream vShaderStream, fShaderStream;
 		// 读取文件的缓冲内容到数据流中
+
 		vShaderStream << vShaderFile.rdbuf();
 		fShaderStream << fShaderFile.rdbuf();
 		// 关闭文件处理器

@@ -121,6 +121,8 @@ int main()
 	};
 
 	// 创建VAO和VBO
+	// VBO 的目标是为所有的顶点数据创建出一块内存，并返回内存的地址
+	// VAO 将VBO中存储的数据进行分组，确定每个数据的表示内容，并保存相应的内存地址
 	unsigned int VBO, VAO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);

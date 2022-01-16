@@ -154,6 +154,7 @@ int main()
 		float greenValue = (sin(timeValue) / 2.0) + 0.5f;
 		int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
 
+
 		// »æÖÆÈý½ÇÐÎ
 		glUseProgram(shaderProgram);
 
