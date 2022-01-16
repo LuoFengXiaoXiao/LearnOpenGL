@@ -126,8 +126,6 @@ int main()
 	unsigned int VBO, VAO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
-	unsigned int EBO;
-	glGenBuffers(1, &EBO);
 
 	// 绑定VAO
 	glBindVertexArray(VAO);
@@ -135,20 +133,18 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// 绑定贴图
 	glBindTexture(GL_TEXTURE_2D, texture);
 	// 设置顶点位置属性指针
 	// 该处的最后一个位置为位置偏移
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 	// 设置顶点颜色属性指针
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	//glEnableVertexAttribArray(1);
 	// 设置纹理的属性指针
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 	// 复制空值顶点数组到缓存中，为了以后安全地解除绑定
 	// 将VAO和VBO传递到地位置均设置为空
@@ -157,11 +153,6 @@ int main()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	// --------------------------------
 	// 顶点链接完成
-
-	// 定义相关的矩阵
-	// m 本地坐标系转换到世界坐标系
-	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::rotate(model, glm::radians(-55.f), glm::vec3(1.0f, 0.f, 0.f));
 
 	// v 世界坐标系转换到观察坐标系
 	glm::mat4 view = glm::mat4(1.0f);
@@ -181,6 +172,12 @@ int main()
 
 		glBindTexture(GL_TEXTURE_2D, texture);
 
+		// 定义相关的矩阵
+		// m 本地坐标系转换到世界坐标系
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::rotate(model, (float)glfwGetTime() * glm::radians(5.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+
+
 		unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "model");
 		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(model));
 
@@ -194,7 +191,7 @@ int main()
 		ourShader.use();
 		// 只有一个VAO，所以不需要每次都去绑定，但是绑定可以使程序更有条理
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -203,7 +200,6 @@ int main()
 	// 结束之后删除相关的内存占用
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
 	//删除shader中program的内存占用
 	ourShader.deleteProgram();
 
