@@ -70,7 +70,16 @@
     <ClCompile Include="5.1.0CoordSystem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="5.1.1CoordSystem_MoreTriangle.cpp" />
+    <ClCompile Include="5.1.1CoordSystem_MoreTriangle.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="5.1.2CoordSystem_MTZBuffer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="5.1.3CoordSystem_MoreCube.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="5.1.4CoordSystem_Practice1.cpp" />
     <ClCompile Include="glad\glad.c" />
     <ClCompile Include="1.1Hello,OpenGL.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

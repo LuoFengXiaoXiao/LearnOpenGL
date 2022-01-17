@@ -78,6 +78,15 @@
     <ClCompile Include="5.1.1CoordSystem_MoreTriangle.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="5.1.2CoordSystem_MTZBuffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="5.1.3CoordSystem_MoreCube.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="5.1.4CoordSystem_Practice1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">
