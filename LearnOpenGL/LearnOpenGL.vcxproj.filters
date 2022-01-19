@@ -87,6 +87,12 @@
     <ClCompile Include="5.1.4CoordSystem_Practice1.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="6.1.0Camera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="6.1.1CameraMove.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">

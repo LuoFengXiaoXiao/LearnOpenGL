@@ -79,7 +79,13 @@
     <ClCompile Include="5.1.3CoordSystem_MoreCube.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="5.1.4CoordSystem_Practice1.cpp" />
+    <ClCompile Include="5.1.4CoordSystem_Practice1.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="6.1.0Camera.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="6.1.1CameraMove.cpp" />
     <ClCompile Include="glad\glad.c" />
     <ClCompile Include="1.1Hello,OpenGL.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
