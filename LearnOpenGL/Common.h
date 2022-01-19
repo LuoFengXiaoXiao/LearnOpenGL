@@ -13,6 +13,10 @@ using namespace std;
 
 #define _DEBUG_LOG_PRINT 1
 
+// 跟踪帧率
+float deltaTime = 0.0f; // 当前帧与上一帧的时间差
+float lastFrame = 0.0f; // 上一帧的时间
+
 // 初始化摄像机位置
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.f, 3.0f);
 glm::vec3 cameraTarget = glm::vec3(0.f, 0.f, 0.f);
@@ -51,7 +55,7 @@ void processInput(GLFWwindow* window)
 
 
 	// 相机移动控制
-	float cameraSpeed = 0.05f; // 自定义的速度，会和电脑的性能有关系
+	float cameraSpeed = 2.5* deltaTime; // 自定义的速度，会和电脑的性能有关系
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		cameraPos += cameraSpeed * (-cameraDirection);
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)

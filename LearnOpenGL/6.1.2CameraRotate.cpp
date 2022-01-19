@@ -193,11 +193,6 @@ int main()
 
 		glBindTexture(GL_TEXTURE_2D, texture);
 
-		// 每帧计算帧率
-		float currentFrame = glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
-
 		// 使用LookAt创建一个观察矩阵
 		glm::mat4 view = glm::mat4(1.0f);
 		view = glm::lookAt(cameraPos, (cameraPos - cameraDirection), cameraUp);
