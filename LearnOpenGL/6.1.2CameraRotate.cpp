@@ -22,7 +22,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	// 设置生成的窗口是否透明，0：不透明，1：透明
 	glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, 1);
-
+	
 
 #ifdef __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -38,6 +38,12 @@ int main()
 
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	// 设置隐藏鼠标,并且一直捕捉鼠标
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	// 绑定鼠标回调函数
+	glfwSetCursorPosCallback(window, mouse_callback);
+	// 注册滚轮函数
+	glfwSetScrollCallback(window, scroll_callback);
 
 	// 管理opengl的函数指针
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -175,12 +181,6 @@ int main()
 	//glm::mat4 view = glm::mat4(1.0f);
 	//view = glm::translate(view, glm::vec3(0.0f, 0.f, -3.f));
 
-	// p 观察坐标系转换到投影坐标系
-	glm::mat4 projection = glm::mat4(1.0f);
-	projection = glm::perspective(glm::radians(60.f), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.f);
-
-
-
 
 
 	// 渲染循环
@@ -195,7 +195,11 @@ int main()
 
 		// 使用LookAt创建一个观察矩阵
 		glm::mat4 view = glm::mat4(1.0f);
-		view = glm::lookAt(cameraPos, (cameraPos - cameraDirection), cameraUp);
+		view = view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+
+		// p 观察坐标系转换到投影坐标系
+		glm::mat4 projection = glm::mat4(1.0f);
+		projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 45.0f);
 
 		unsigned int MView = glGetUniformLocation(ourShader.ID, "view");
 		glUniformMatrix4fv(MView, 1, GL_FALSE, glm::value_ptr(view));
