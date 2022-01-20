@@ -38,8 +38,11 @@ int main()
 
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	// set keyboard mode
 	// 设置隐藏鼠标,并且一直捕捉鼠标
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	// 设置鼠标的初始位置
+	glfwSetCursorPos(window, SCR_WIDTH/2, SCR_HEIGHT/2);
 	// 绑定鼠标回调函数
 	glfwSetCursorPosCallback(window, mouse_callback);
 	// 注册滚轮函数
@@ -192,6 +195,11 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glBindTexture(GL_TEXTURE_2D, texture);
+
+		// 每帧计算帧率
+		float currentFrame = glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
 
 		// 使用LookAt创建一个观察矩阵
 		glm::mat4 view = glm::mat4(1.0f);
