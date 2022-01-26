@@ -96,6 +96,12 @@
     <ClCompile Include="6.1.2CameraRotate.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="7.1.1Color.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h">
@@ -105,6 +111,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Texture\stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
