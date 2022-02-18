@@ -94,7 +94,10 @@
     <ClCompile Include="7.1.1Color.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="7.1.2BasicLighting.cpp" />
+    <ClCompile Include="7.1.2BasicLighting.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="7.1.3BasicLightingDiffuse.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="glad\glad.c" />
     <ClCompile Include="1.1Hello,OpenGL.cpp">
