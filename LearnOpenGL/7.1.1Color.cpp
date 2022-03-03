@@ -148,6 +148,9 @@ int main()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
+	// 开启深度测试
+	glEnable(GL_DEPTH_TEST);
+
 	// 渲染循环
 	while (!glfwWindowShouldClose(window))
 	{

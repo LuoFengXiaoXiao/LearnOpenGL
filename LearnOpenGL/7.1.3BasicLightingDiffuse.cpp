@@ -20,7 +20,8 @@ int main()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	// 设置生成的窗口是否透明，0：不透明，1：透明
-	glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, 1);
+	glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, 0);
+
 
 #ifdef __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -48,9 +49,9 @@ int main()
 
 	// 创建读取shader
 	// 光源照射的物体
-	Shader CubeShader("shader/VertexShader/7.1.3BasicLightingDiffuse.vs", "shader/FragShader/7.1.3BasicLightingDiffuse.fs");
+	Shader CubeShader("shader/VertexShader/7.1.3BLDCube.vs", "shader/FragShader/7.1.3BLDCube.fs");
 	// 光源的shader
-	Shader LightShader("shader/VertexShader/7.1.1LightColor.vs", "shader/FragShader/7.1.1LightColor.fs");
+	Shader LightShader("shader/VertexShader/7.1.3LightColor.vs", "shader/FragShader/7.1.3LightColor.fs");
 
 	unsigned int texture;
 	// 纹理读取生成
@@ -84,41 +85,42 @@ int main()
 	// 创建初始的顶点数组
 	float vertices[] = {
 		// 顶点位置            // 顶点法线
+		// 下表面
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
-
+		// 上表面
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		// 左表面
 		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
 		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
 		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
 		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-
+		// 右表面
 		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 		 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
 		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
 		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
 		 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-
+		 // 后表面
 		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 		 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
 		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
 		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
 		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-
+		// 前表面
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
 		 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
 		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
@@ -127,22 +129,20 @@ int main()
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 	};
 
+	unsigned int CubeVAO;
+	glGenVertexArrays(1, &CubeVAO);
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
 	// 绑定VBO,复制顶点数组到缓冲中供OpenGL使用
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	unsigned int CubeVAO;
-	glGenVertexArrays(1, &CubeVAO);
 	glBindVertexArray(CubeVAO);
-	// 只需要绑定VBO不用再次设置VBO的数据，因为箱子的VBO数据已经包含了正确的立方体顶点数据
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	// 设置灯立方体的顶点属性（对我们的灯来说仅仅只有位置数据）
+	// 设置立方体的顶点属性
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 	// 设置立方体的法线属性
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
 	unsigned int lightVAO;
@@ -153,9 +153,14 @@ int main()
 	// 设置灯立方体的顶点属性（对我们的灯来说仅仅只有位置数据）
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	// 设置光源的法线属性
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	// 设置立方体的法线属性
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
+
+	// 开启深度测试
+	glEnable(GL_DEPTH_TEST);
+
+	glm::vec3 lightColor = glm::vec3(0.2f, 0.8f, 0.2f);
 
 	// 渲染循环
 	while (!glfwWindowShouldClose(window))
@@ -167,18 +172,21 @@ int main()
 		lastFrame = currentFrame;
 
 		processInput(window);
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		// 添加z-buffer 缓存
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//glBindTexture(GL_TEXTURE_2D, texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
 
-		// 绘制四面体
+
+
+		// 物体
 		CubeShader.use();
 		CubeShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-		CubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-
-		std::cout << "Camera Yaw : " << camera.Yaw << std::endl;
+		CubeShader.setVec3("lightColor", lightColor);
+		CubeShader.setVec3("lightPos", lightPos);
+		
+		//std::cout << "Camera Yaw : " << camera.Yaw << std::endl;
 
 		// view/projection transformations
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
@@ -193,7 +201,9 @@ int main()
 		glBindVertexArray(CubeVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+		// 光源
 		LightShader.use();
+		LightShader.setVec3("lightColor", lightColor);
 		LightShader.setMat4("projection", projection);
 		LightShader.setMat4("view", view);
 		model = glm::mat4(1.0f);
@@ -204,7 +214,6 @@ int main()
 		// 只有一个VAO，所以不需要每次都去绑定，但是绑定可以使程序更有条理
 		glBindVertexArray(lightVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
